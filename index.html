@@ -1,8 +1,346 @@
-<!doctype html><html>
-<head><title>icons</title></head>
+<!doctype html>
+
+<head>
+  <title>ikons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script id="nosepicker" src="nosepicker.micro.js"></script>
+  <style id="appStyles">
+  
+   :root {
+      --ratColor: hsla(40,54%,40%,1);
+      --hue: 40;
+      --sat: 60%;
+      --lit: 80%;
+      --midSat: calc(0.9 * var(--sat));
+      --darSat: calc(0.7 * var(--sat));
+      --midLit: calc(0.5 * var(--lit));
+      --darLit: calc(0.3 * var(--lit));
+      --mainColor: hsla(var(--hue), var(--sat), var(--lit), 1.0);
+      --midColor: hsla(var(--hue), var(--midSat), var(--midLit), 1.0);
+      --darkColor: hsla(var(--hue), var(--darSat), var(--darLit), 1.0);
+      --anispeed: 800ms;
+      --transpeed: 200ms;
+  }
+  
+  * {
+      box-sizing: border-box;
+      word-wrap: break-word;
+      hyphens: auto;
+  }
+  
+  body {
+      padding: 0px;
+      margin: 0px;
+      font-size: 22px;
+  }
+  
+  [data-icon] {
+      position: relative;
+      background-color: var(--mainColor);
+      color: var(--midColor);
+      margin: 0 auto 50px auto;
+      width: 100%;
+      max-width: 600px;
+  }
+  
+  .qa {
+      border: 1px solid #000;
+  }
+  
+  .qr {
+      padding: 10px;
+      text-align: justify;
+  }
+  
+  .qa,
+  .qr {
+      transition: all linear var(--transpeed);
+  }
+  
+  a, a:hover, a:visited {
+      color: var(--darkColor);
+      transition: color linear var(--transpeed);
+  }
+  
+  .qa:after {
+      content: "";
+      display: table;
+      clear: both;
+  }
+  
+  .qa > div {
+      float: left;
+      padding: 10px;
+      height: 100%;
+  }
+  
+  .qa > div:nth-child(1) {
+      width: 65%;
+  }
+  
+  .qa > div:nth-child(2) {
+      width: 35%;
+  }
+ 
+  /*possibly a portrait mobi-fone*/
+  @media screen and (max-width:500px) {
+
+      .qa>div:nth-child(1),
+      .qa>div:nth-child(2) {
+          width: 100%;
+      }
+      
+  }
+  
+  /*possibly a mobile landscaper*/
+  @media screen and (orientation: landscape) and (max-width: 760px) {
+ 
+  }
+
+  svg {
+      width: 100%;
+      transition: stroke-width linear 0.2s;
+  }
+  
+  [data-t]{
+      font-size:10px;
+      line-height: 10px;
+  }
+  
+  h2 {
+      line-height: 0px;
+      color: var(--darkColor);
+  }
+  </style>
+</head>
 
 <body>
-<img src="bikeIcon.svg">
+<div id="bike" data-icon>
+    
+    <div id="bikeDesc" class="qr">
+        <h2>bicycle icon</h2>
+        306 bytes
+        <p data-t>
+        uses a <i>style</i> tag in an svg image file so that the
+        same file can either be used as the <i>src</i> for an
+        img tag,
+        or instanciated and manipulated as an svg <i>use</i>
+        statement
+        </p>
+        <p data-t>
+            scroll up|dn and left|right on the svg image to
+            change the color; press +|- to change the thickness;
+            click to display the code for that color and size
+        </p>
+    </div>
+    
+    <div id="bikeMigs" class="qa">
+        <div id="bikeSVGtext" style="--nose-hsla:var(--ratColor)">
+            
+            <i data-t style="color:var(--nose-hsla);">
+                an svg use statement:
+            </i>
+            <svg id="bikeIconSVG"
+             xmlns:xlink="http://www.w3.org/2000/svg"
+             viewbox="0 0 88 50"
+             data-nose='{"root":"bikeSVGtext"}'
+             style="stroke-width: 3;"
+            >
+                <use xlink:href="bikeIcon.svg#icon"
+                 stroke="var(--nose-hsla)"
+                ></use>
+            </svg>
+            
+            <i data-t style="color:#000;">an html img tag:</i>
+            <img src="bikeIcon.svg" style="width:100%;">
+            
+        </div>
+        <div id="bikeIconCode" style="background-color:black;text-align:center;">
+        </div>
+    </div>
+    
+</div>
 </body>
 
+<script>
+
+let pressLiz = (e, k = e.key) => {
+            
+    if (!(/\+|=|-|_/).test(k)) { return; }
+    
+    let w = parseFloat(bikeIconSVG.style['stroke-width']);
+            
+    w +=
+    ((/\+|=/).test(k)) ? (w < 1) ? 0.1 : 1 :
+    ((/-|_/).test(k))  ? (w > 1) ?  -1 : (w - 0.1 > 0) ? -0.1 : 0
+    : 0;
+
+    
+    bikeIconSVG.style.strokeWidth = w.toFixed(1);
+    
+};
+
+/*
+bikeIconSVG.addEventListener('mouseover', e =>
+    window.addEventListener('keydown', pressLiz)
+);
+bikeIconSVG.addEventListener('mouseout', e =>
+    window.removeEventListener('keydown', pressLiz)
+);
+
+document.querySelectorAll('[data-icon]').forEach(holder => {
+    console.log('svg is', holder.querySelector('svg'))
+})
+*/
+</script>
+
+<script id="projectScript">
+
+new Date() < new Date('2023-10-13') &&
+
+((dset = document.currentScript.dataset) => //{
+
+    document.addEventListener('DOMContentLoaded', e =>
+        
+        new (function( // app prefs {
+    
+            default_prefs = {
+                appname: 'icon displayer',
+                selector: 'icon',
+                passive: false
+            },
+    
+            param_prefs = JSON.parse(
+                Object.values(dset)[0] || '{}'
+            ),
+    
+            stored_prefs = JSON.parse(
+                localStorage[
+                    param_prefs.appname || default_prefs.appname
+                ] || '{}'
+            ),
+    
+            prefs = Object.assign({}, default_prefs, param_prefs, stored_prefs),
+    
+            nicknames = {},
+            
+            methods = {
+                a : selector => {console.log(
+                    selector.vals.obj.id, 'running method a',
+                    '\nthis is:', selector.svg
+                )},
+                pressLiz: (e, selector, k = e.key) => {
+                    if (!(/\+|=|-|_/).test(k)) { return; }
+                
+                    let w = parseFloat(bikeIconSVG.style['stroke-width']);
+                
+                    w +=
+                        ((/\+|=/).test(k)) ? (w < 1) ? 0.1 : 1 :
+                        ((/-|_/).test(k)) ? (w > 1) ? -1 : (w - 0.1 > 0) ? -0.1 : 0 :
+                        0;
+                
+                    selector.style.strokeWidth = w.toFixed(1);
+                }
+            },
+            
+            lizzers = {
+                
+                click: (e, selector) => {
+                    console.log('svg click id',selector.a())
+                },
+                
+                mouseover: (e, selector) => {
+                    selector.tmpFunc = E => methods.pressLiz(E, selector);
+                    window.addEventListener('keydown', selector.tmpFunc)
+                },
+                mouseout: (e, selector) => {
+                    window.removeEventListener('keydown', selector.tmpFunc)
+                },
+            }
+            //}
+    
+        ) {
+    
+            document.querySelectorAll(
+    
+                `[data-${prefs.selector}]:not(script)`
+    
+            ).forEach((obj, i) => obj.dispatchEvent(
+                new CustomEvent(prefs.selector + '-load', {
+                    detail: (this[i] = new (function() {
+                        
+                        this.vals = new Proxy(Object.assign({},
+                            prefs,
+                            JSON.parse(obj.dataset[prefs.selector] || '{}'),
+                            stored_prefs[obj.id] || {}
+                            ,{ obj: obj, id: obj.id }
+                        ), {
+                            get (tar, prop) { return tar[prop] },
+                            set (tar, prop, val) { tar[prop] = val},
+                        });
+                        
+                        this.svg = obj.querySelector('svg');
+                        this.img = obj.querySelector('img');
+                        
+                        [methods, lizzers].forEach((M, i) => {
+                            for (const[k, v] of Object.entries(M)) {
+                                i === 0 ?
+                                this[k] = () => v(this) :
+                                this.svg.addEventListener(k,
+                                e => v(e, this.svg),
+                                {passive: this.vals.passive})
+                            }
+                        });
+                        this.a(this);
+                        
+                    })()),
+                    
+                    n : nicknames[obj.id || prefs.selecor + i] =
+                        nicknames[prefs.selector + i] = i
+    
+                })
+            ));
+            
+            for (const [key, val] of Object.entries({
+            
+                load: e => window.dispatchEvent(
+                    new CustomEvent(prefs.selector + '-load', {
+                        detail: new Proxy(this, {
+                            get(target, prop) {
+                                return target[nicknames[prop]] || target[prop] || '';
+                            }
+                        })
+                    })
+                ),
+            
+                beforeunload: e => {
+                    //localStorage.setItem(prefs.appName, JSON.stringify(prefs))
+                },
+                
+                ['get-' + prefs.selector] : e => {
+                    console.log('getting ref', e);
+                    e.detail = new Proxy(this, {
+                        get(target, prop) {
+                            return target[nicknames[prop]] || target[prop] || '';
+                        }
+                    })
+                }
+            
+            })){
+                window.addEventListener(key, val);//, { once: true });
+            }
+            
+        })()
+    
+    )
+    
+)() //}
+
+=== undefined || (document.body.innerHTML = 'eXp!red');
+
+
+</script>
+
+
 </html>
+  
