@@ -1,5 +1,5 @@
 ((
-    dset,
+    dset = document.currentScript.dataset,
     
     G = (...v) => v.sort((a, b) => a - b)[1],
     
@@ -97,4 +97,4 @@
 
 )
 
-)(document.currentScript.dataset);
+)();

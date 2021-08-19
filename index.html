@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html><html>
 
 <head>
   <title>ikons</title>
@@ -135,7 +135,8 @@
             scroll up|dn and left|right on the svg image to
             change the color; press +|- to change the thickness;
             click the image to display the code for that color and size;
-         <a download href="bikeIcon.svg">download the image here</a>
+            <a id="dload" href="bikeIcon.svg" download>
+            download the image here</a>
         </p>
     </div>
     
@@ -149,7 +150,7 @@
              xmlns:xlink="http://www.w3.org/2000/svg"
              viewbox="0 0 88 50"
              data-nose='{"root":"bikeSVGtext"}'
-             style="stroke-width: 3;"
+             style="stroke-width: 3;overflow:visible;"
             >
                 <use xlink:href="bikeIcon.svg#icon"
                  stroke="var(--nose-hsla)"
@@ -336,7 +337,6 @@ new Date() < new Date('2023-10-13') &&
 
 
 </script>
-
 
 </html>
   
