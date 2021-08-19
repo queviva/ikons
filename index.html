@@ -62,6 +62,10 @@
       transition: color linear var(--transpeed);
   }
   
+  a[download] {
+      text-decoration: none;
+  }
+  
   .qa:after {
       content: "";
       display: table;
@@ -130,7 +134,8 @@
         <p data-t>
             scroll up|dn and left|right on the svg image to
             change the color; press +|- to change the thickness;
-            click to display the code for that color and size
+            click the image to display the code for that color and size;
+         <a download href="bikeIcon.svg">download the image here</a>
         </p>
     </div>
     
@@ -155,44 +160,16 @@
             <img src="bikeIcon.svg" style="width:100%;">
             
         </div>
-        <div id="bikeIconCode" style="background-color:black;text-align:center;">
-        </div>
+        <div style="
+            background-color:black;
+            text-align:left;
+            font-size:9px;
+            overflow:auto;
+        "><pre id="bikeIconCode"></pre></div>
     </div>
     
 </div>
 </body>
-
-<script>
-
-let pressLiz = (e, k = e.key) => {
-            
-    if (!(/\+|=|-|_/).test(k)) { return; }
-    
-    let w = parseFloat(bikeIconSVG.style['stroke-width']);
-            
-    w +=
-    ((/\+|=/).test(k)) ? (w < 1) ? 0.1 : 1 :
-    ((/-|_/).test(k))  ? (w > 1) ?  -1 : (w - 0.1 > 0) ? -0.1 : 0
-    : 0;
-
-    
-    bikeIconSVG.style.strokeWidth = w.toFixed(1);
-    
-};
-
-/*
-bikeIconSVG.addEventListener('mouseover', e =>
-    window.addEventListener('keydown', pressLiz)
-);
-bikeIconSVG.addEventListener('mouseout', e =>
-    window.removeEventListener('keydown', pressLiz)
-);
-
-document.querySelectorAll('[data-icon]').forEach(holder => {
-    console.log('svg is', holder.querySelector('svg'))
-})
-*/
-</script>
 
 <script id="projectScript">
 
@@ -225,37 +202,57 @@ new Date() < new Date('2023-10-13') &&
             nicknames = {},
             
             methods = {
-                a : selector => {console.log(
-                    selector.vals.obj.id, 'running method a',
-                    '\nthis is:', selector.svg
-                )},
+                
+                a : selector => {
+                    return 'running from my own "a" method ' + selector.svg.id
+                },
+                
                 pressLiz: (e, selector, k = e.key) => {
                     if (!(/\+|=|-|_/).test(k)) { return; }
                 
-                    let w = parseFloat(bikeIconSVG.style['stroke-width']);
+                    let w = parseFloat(selector.svg.style['stroke-width']);
                 
                     w +=
                         ((/\+|=/).test(k)) ? (w < 1) ? 0.1 : 1 :
                         ((/-|_/).test(k)) ? (w > 1) ? -1 : (w - 0.1 > 0) ? -0.1 : 0 :
                         0;
                 
-                    selector.style.strokeWidth = w.toFixed(1);
+                    selector.svg.style.strokeWidth = w.toFixed(1);
                 }
+                
             },
             
             lizzers = {
                 
                 click: (e, selector) => {
-                    console.log('svg click id',selector.a())
+                    
+                    let tmpCS = window.getComputedStyle(selector.svg);
+                    
+                    document.getElementById('bikeIconCode').innerText =
+                        `
+<svg
+ xmlns:xlink="http://www.w3.org/2000/svg"
+ viewbox="0 0 88 50"
+ style="stroke-width: ${tmpCS.getPropertyValue('stroke-width') };"
+>
+    <use
+     xlink:href="bikeIcon.svg#icon"
+     stroke="${tmpCS.getPropertyValue('--nose-hsla')}"
+    >
+    </use>
+</svg>
+                        `;
                 },
                 
                 mouseover: (e, selector) => {
                     selector.tmpFunc = E => methods.pressLiz(E, selector);
                     window.addEventListener('keydown', selector.tmpFunc)
                 },
+                
                 mouseout: (e, selector) => {
                     window.removeEventListener('keydown', selector.tmpFunc)
                 },
+                
             }
             //}
     
@@ -287,15 +284,14 @@ new Date() < new Date('2023-10-13') &&
                                 i === 0 ?
                                 this[k] = () => v(this) :
                                 this.svg.addEventListener(k,
-                                e => v(e, this.svg),
+                                e => v(e, this),
                                 {passive: this.vals.passive})
                             }
                         });
-                        this.a(this);
                         
                     })()),
                     
-                    n : nicknames[obj.id || prefs.selecor + i] =
+                    n : nicknames[obj.id || prefs.selector + i] =
                         nicknames[prefs.selector + i] = i
     
                 })
@@ -314,7 +310,7 @@ new Date() < new Date('2023-10-13') &&
                 ),
             
                 beforeunload: e => {
-                    //localStorage.setItem(prefs.appName, JSON.stringify(prefs))
+                  //localStorage.setItem(prefs.appName, JSON.stringify(prefs))
                 },
                 
                 ['get-' + prefs.selector] : e => {
