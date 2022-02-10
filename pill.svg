@@ -13,7 +13,7 @@
             style="fill:var(--body-color)" />
                    
             <path d="M -18 -13 L -11 -4 L -14 5 L -10 5 Q 10 5 23.5 -12 L 23.6 -14 Q 0 -9 -18 -13 Z "
-                fill="var(--ridge-shade)" />
+                fill="var(--shade-color)" />
             
             <path d="M 8.8 -24.5 C 10.5 -45.2 8.8 -59.0 4.3 -65.0 C13.9 -54.7 23.4 -48.5 32.6 -46.4 C45.4 4.6 30.7 56.1 7.8 64.6 C0.6 61.2 -12.5 58.8 -22.5 57.8 Q -5.1 44.2 0.7 21.1 L3.1 12.2 C7.6 13.2 11.8 17.8 15.1 22.2 Q 22 9 23.6 -14 L 7.5 -11.7 C8.2 -16.0 8.8 -24.5 8.8 -24.5 Z "
                 fill="var(--key-light)" />
@@ -40,7 +40,7 @@ css vars :::
 
 --body-color : [color];
 --outline-color : [color];
---ridge-shade: [color];
+--shade-color: [color];
 --key-light : [color];
 --fill-light: [color];
 --back-light : [color];
@@ -53,7 +53,7 @@ css vars :::
          
             --body-color: #ddd;
             --outline-color: #000;
-            --ridge-shade: hsla(0,0%,0%,0.4);
+            --shade-color: hsla(0,0%,0%,0.4);
             
             --key-light: hsla(0,0%,0%,0.4);
             --fill-light: hsla(0,0%,0%,0.0);
