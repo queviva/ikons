@@ -221,7 +221,12 @@ svg {
         0%,
         calc(var(--nose-l))
     );
-    --back: hsla(240, 50%, 50%, var(--nose-l));
+    --back: hsla(
+        calc(180 + var(--nose-h)),
+        50%,
+        50%,
+        var(--nose-l)
+    );
     --shade: hsla(0, 0%, 0%, 0.35);
 }
 
@@ -270,7 +275,11 @@ svg {
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             viewBox="-5 -5 320 210"
-        ><g id="sceneGroup" data-nose="svgHolder">
+        ><g
+          id="sceneGroup"
+          data-nose="svgHolder"
+          pointer-events="all"
+         >
           <use id="rex" xlink:href="rex.svg#ikon"
            transform="translate(100,110)"
           />
@@ -390,7 +399,7 @@ svg {
             --outline-color:var(--blackness);
             --label-color: var(--lid-color);
             --label-outline: 3;
-            --label-outline-color: hsla(30,80%,20%,0.4);
+            --label-outline-color: var(--darkness);
             --RX-color: var(--outline-color);
             --key-light: none;
             --fill-light: none;
