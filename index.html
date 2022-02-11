@@ -1,342 +1,414 @@
 <!doctype html><html>
 
 <head>
-  <title>ikons</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script id="nosepicker" src="nosepicker.micro.js"></script>
-  <style id="appStyles">
-  
-   :root {
-      --ratColor: hsla(40,54%,40%,1);
-      --hue: 40;
-      --sat: 60%;
-      --lit: 80%;
-      --midSat: calc(0.9 * var(--sat));
-      --darSat: calc(0.7 * var(--sat));
-      --midLit: calc(0.5 * var(--lit));
-      --darLit: calc(0.3 * var(--lit));
-      --mainColor: hsla(var(--hue), var(--sat), var(--lit), 1.0);
-      --midColor: hsla(var(--hue), var(--midSat), var(--midLit), 1.0);
-      --darkColor: hsla(var(--hue), var(--darSat), var(--darLit), 1.0);
-      --anispeed: 800ms;
-      --transpeed: 200ms;
-  }
-  
-  * {
-      box-sizing: border-box;
-      word-wrap: break-word;
-      hyphens: auto;
-  }
-  
-  body {
-      padding: 0px;
-      margin: 0px;
-      font-size: 22px;
-  }
-  
-  [data-icon] {
-      position: relative;
-      background-color: var(--mainColor);
-      color: var(--midColor);
-      margin: 0 auto 50px auto;
-      width: 100%;
-      max-width: 600px;
-  }
-  
-  .qa {
-      border: 1px solid #000;
-  }
-  
-  .qr {
-      padding: 10px;
-      text-align: justify;
-  }
-  
-  .qa,
-  .qr {
-      transition: all linear var(--transpeed);
-  }
-  
-  a, a:hover, a:visited {
-      color: var(--darkColor);
-      transition: color linear var(--transpeed);
-  }
-  
-  a[download] {
-      text-decoration: none;
-  }
-  
-  .qa:after {
-      content: "";
-      display: table;
-      clear: both;
-  }
-  
-  .qa > div {
-      float: left;
-      padding: 10px;
-      height: 100%;
-  }
-  
-  .qa > div:nth-child(1) {
-      width: 65%;
-  }
-  
-  .qa > div:nth-child(2) {
-      width: 35%;
-  }
- 
-  /*possibly a portrait mobi-fone*/
-  @media screen and (max-width:500px) {
+<title>ikonoklazc</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link id="luckiestFont" href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+<style id="demoStyles">
+:root {
+    
+    --circ-h: 20;
+    --circ-s: 40%;
+    --circ-l: 100%;
+    --circ-a: 1;
+                
+    --lightness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        var(--circ-l)
+    );
+    
+    --midness: hsl(
+        var(--circ-h),
+        calc(0.8 * var(--circ-s)),
+        calc(0.75 * var(--circ-l))
+    );
+    
+    --darkness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        calc(0.35 * var(--circ-l))
+    );
+    
+    --blackness: hsl(
+        var(--circ-h),
+        var(--circ-s),
+        calc(0.20 * var(--circ-l))
+    );
+                
+    --main-color: var(--lightness);
+    --greyed-out: var(--darkness);
+    --back-color: #666;
+    --holder-back: #111;
+    --faded-txt: hsla(
+        var(--circ-h),
+        var(--circ-s),
+        var(--midness),
+        0.5
+    );
+    
+    --trans-speed: 0.3s;
+    
+}
 
-      .qa>div:nth-child(1),
-      .qa>div:nth-child(2) {
-          width: 100%;
-      }
-      
-  }
-  
-  /*possibly a mobile landscaper*/
-  @media screen and (orientation: landscape) and (max-width: 760px) {
- 
-  }
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
 
-  svg {
-      width: 100%;
-      transition: stroke-width linear 0.2s;
-  }
-  
-  [data-t]{
-      font-size:10px;
-      line-height: 10px;
-  }
-  
-  h2 {
-      line-height: 0px;
-      color: var(--darkColor);
-  }
-  </style>
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--back-color);
+    font-size: 22px;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -epub-hyphens: auto;
+    hyphens: auto;
+}
+
+.holder {
+	position: relative;
+    color: var(--main-color);
+    background-color: var(--holder-back);
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--greyed-out);
+}
+
+a:hover, a:visited {
+    color: var(--greyed-out);
+    transition: color linear var(--trans-speed);
+}
+
+h2 {
+    color: var(--darkness);
+}
+
+b {
+    color: var(--darkness);
+}
+
+pre {
+    background-color: var(--midness);
+    margin: 0px;
+    padding: 10px;
+    color: var(--lightness);
+    overflow: auto;
+}
+
+hr {
+    border-top: 1px solid var(--blackness);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 7px 0px 7px 0px;
+}
+
+.qr {
+    padding: 10px;
+}
+
+.qa:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qa > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qa > div:nth-child(1) {
+  width: 65%;
+}
+
+.qa > div:nth-child(2) {
+  width: 35%;
+}
+
+.qb:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qb > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qb > div:nth-child(1) {
+  width: 35%;
+}
+
+.qb > div:nth-child(2) {
+  width: 65%;
+}
+
+.mobr {
+    display: none;
+}
+
+.hobr {
+    display: inline-block;
+}
+
+/*possibly a portrait mobi-fone*/
+@media screen and (max-width:500px) {
+
+	.qa > div:nth-child(1),
+	.qa > div:nth-child(2),
+	.qb > div:nth-child(1),
+	.qb > div:nth-child(2)
+	{
+    	width: 100%;
+    }
+    
+    .mobr {
+        display: inline-block;
+    }
+    .hobr {
+        display: none;
+    }
+    
+}
+
+/*possibly a mobile landscaper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+
+    
+}
+
+.signature {
+    text-align: right;
+    font-family: 'luckiest guy';
+    font-style: italic;
+    height: 200px;
+    color: var(--darkness);
+    user-select:none;
+}
+
+</style>
+<style id="svgStyles">
+
+svg {
+    height: inherit;
+    width: inherit;
+    display:block;
+}
+
+#svgHolder {
+    --nose-hsla: hsla(40, 100%, 70%, 0.5);
+    --key: hsla(
+        var(--nose-h),
+        var(--nose-s),
+        var(--nose-l),
+        var(--nose-l)
+    );
+    --fill: hsla(
+        var(--nose-h),
+        0%,
+        0%,
+        calc(var(--nose-l))
+    );
+    --back: hsla(240, 50%, 50%, var(--nose-l));
+    --shade: hsla(0, 0%, 0%, 0.35);
+}
+
+#svgDemo {
+    
+    border: 10px solid #000;
+    background-color: #666;
+}
+
+#rex {
+    
+    --RX-color: hsla(0,80%,20%,0.12);
+    --RX-visibility: hidden;
+                
+    --key-light: var(--key);
+    --fill-light: var(--fill);
+    --back-light: var(--back);
+    
+}
+
+#pill {
+    --body-color: #ddd;
+    --outline-color: #000;
+    
+    --key-light: var(--key);
+    --fill-light: var(--fill);
+    --back-light: var(--back);
+    --shade-color: var(--shade);
+}
+
+#ground {
+    --color: #000;
+}
+    
+</style>
+<script defer src="../nosepicker/nosepicker.nano.js"></script>
 </head>
 
 <body>
-<div id="bike" data-icon>
+<div class="holder">
     
-    <div id="bikeDesc" class="qr">
-        <h2>bicycle icon</h2>
-        306 bytes
-        <p data-t>
-        uses a <i>style</i> tag in an svg image file so that the
-        same file can either be used as the <i>src</i> for an
-        img tag,
-        or instanciated and manipulated as an svg <i>use</i>
-        statement
-        </p>
-        <p data-t>
-            scroll up|dn and left|right on the svg image to
-            change the color; press +|- to change the thickness;
-            click the image to display the code for that color and size;
-            <a id="dload" href="bikeIcon.svg" download>
-            download the image here</a>
-        </p>
+    <div demo class="qr">
+        
+      <div id="svgHolder">
+        <svg id="svgDemo"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="-5 -5 320 210"
+        ><g id="sceneGroup" data-nose="svgHolder">
+          <use id="rex" xlink:href="rex.svg#ikon"
+           transform="translate(100,110)"
+          />
+            
+          <use id="pill" xlink:href="pill.svg#ikon"
+           transform="translate(230,117)"
+          />
+            
+          <use id="ground" xlink:href="ground.svg#ikon"
+           transform="translate(155,177)"
+          />
+        </g></svg>
+      </div>
+      
+      <br>
+      <center style="
+        font-size:0.8em;
+        color: var(--blackness);
+      ">
+        <span class="hobr">[</span><i>scroll around
+        on the characters <br class="mobr"> to
+        change the lighting</i><span class="hobr">]</span>
+       </center>
+      
+      <script>
+        ['wheel','touchmove'].forEach(evt => {
+          sceneGroup.addEventListener(evt, e => {
+            document.getElementById('rex')
+            .style.setProperty(
+              '--RX-visibility',
+              window.getComputedStyle(svgHolder)
+              .getPropertyValue('--nose-l') === '0%' ?
+              'visible' : 'hidden'
+             )
+          })
+        });
+      </script>
+      
     </div>
     
-    <div id="bikeMigs" class="qa">
-        <div id="bikeSVGtext" style="--nose-hsla:var(--ratColor)">
-            
-            <i data-t style="color:var(--nose-hsla);">
-                an svg use statement:
-            </i>
-            <svg id="bikeIconSVG"
-             xmlns:xlink="http://www.w3.org/2000/svg"
-             viewbox="0 0 88 50"
-             data-nose='{"root":"bikeSVGtext"}'
-             style="stroke-width: 3;overflow:visible;"
-            >
-                <use xlink:href="bikeIcon.svg#icon"
-                 stroke="var(--nose-hsla)"
-                ></use>
-            </svg>
-            
-            <i data-t style="color:#000;">an html img tag:</i>
-            <img src="bikeIcon.svg" style="width:100%;">
-            
+    <hr>
+    
+    <div intro class="qr">
+        
+        that scene is composed of a series of
+        <b>ikons</b> - svg images that can
+        be instanciated and styled with css,
+        or simply used as the src in an
+        <i>img</i> tag
+        <br><br>
+    </div>
+    
+    <div rex-mig class="qb">
+        
+        <div style="text-align:center;">
+          <img src="rex.svg" style="
+            height:200px;
+            display: inline-block;
+            vertical-align:top;
+          ">
         </div>
-        <div style="
-            background-color:black;
-            text-align:left;
-            font-size:9px;
-            overflow:auto;
-        "><pre id="bikeIconCode"></pre></div>
+        
+        <div style="color:var(--midness);">
+            take a look at <i><b>Rex</b></i> - here he is
+            as just an image tag, in his default
+            state: a little bit of shade, a very
+            faint logo on his prescription sweater,
+            a white hat; he's just an image, nothing
+            happens if you mouse-over him, or anything
+        </div>
+
     </div>
+    
+    <div poppy-obj class="qa">
+        
+        <div style="color:var(--midness);">
+            now let's look at people like
+            the objects they are!
+            here's <i><b>Poppy</b></i> as the
+            <i>data</i> attribute of an
+            <i>object</i> tag - now if you
+            mouse-over him, you'll see a list
+            of <i>css-variables</i> that can
+            be used customize him
+            when he's finally instanciated in
+            his most useful carnation
+            <br>
+        </div>
+        
+        <div style="text-align:center;">
+            <object data="pill.svg#ikon"
+             style="height:170px;"
+            ></object>
+        </div>
+        
+    </div>
+    
+    <hr>
+    <div rex-use class="qr">
+        
+        finally we have Rex here as an
+        <i>svg use</i> statement that has been
+        customized for our own pleasure;
+        when used this way, it's possible to
+        have ikons dynamically match the page's
+        themes
+        <br><br>
+        
+        <div style="height:250px;width:100%">
+        <svg viewBox="-50 -110 100 200"
+         style="background-color:var(--darkness);"
+        >
+          <use id="trex" xlink:href="rex.svg#ikon"
+           style="
+            --body-color: var(--midness);
+            --lid-color: #fff;
+            --outline-color:var(--blackness);
+            --label-color: var(--lid-color);
+            --label-outline: 3;
+            --label-outline-color: hsla(30,80%,20%,0.4);
+            --RX-color: var(--outline-color);
+            --key-light: none;
+            --fill-light: none;
+            --back-light: none;
+           "
+          />
+        </svg>
+        </div>
+        
+        &middot;&middot;&middot;
+    </div>
+    
+    
+    
+    <br><hr><div class="qr signature">~queviva</div>
     
 </div>
 </body>
-
-<script id="projectScript">
-
-new Date() < new Date('2023-10-13') &&
-
-((dset = document.currentScript.dataset) => //{
-
-    document.addEventListener('DOMContentLoaded', e =>
-        
-        new (function( // app prefs {
-    
-            default_prefs = {
-                appname: 'icon displayer',
-                selector: 'icon',
-                passive: false
-            },
-    
-            param_prefs = JSON.parse(
-                Object.values(dset)[0] || '{}'
-            ),
-    
-            stored_prefs = JSON.parse(
-                localStorage[
-                    param_prefs.appname || default_prefs.appname
-                ] || '{}'
-            ),
-    
-            prefs = Object.assign({}, default_prefs, param_prefs, stored_prefs),
-    
-            nicknames = {},
-            
-            methods = {
-                
-                a : selector => {
-                    return 'running from my own "a" method ' + selector.svg.id
-                },
-                
-                pressLiz: (e, selector, k = e.key) => {
-                    if (!(/\+|=|-|_/).test(k)) { return; }
-                
-                    let w = parseFloat(selector.svg.style['stroke-width']);
-                
-                    w +=
-                        ((/\+|=/).test(k)) ? (w < 1) ? 0.1 : 1 :
-                        ((/-|_/).test(k)) ? (w > 1) ? -1 : (w - 0.1 > 0) ? -0.1 : 0 :
-                        0;
-                
-                    selector.svg.style.strokeWidth = w.toFixed(1);
-                }
-                
-            },
-            
-            lizzers = {
-                
-                click: (e, selector) => {
-                    
-                    let tmpCS = window.getComputedStyle(selector.svg);
-                    
-                    document.getElementById('bikeIconCode').innerText =
-                        `
-<svg
- xmlns:xlink="http://www.w3.org/2000/svg"
- viewbox="0 0 88 50"
- style="stroke-width: ${tmpCS.getPropertyValue('stroke-width') };"
->
-    <use
-     xlink:href="bikeIcon.svg#icon"
-     stroke="${tmpCS.getPropertyValue('--nose-hsla')}"
-    >
-    </use>
-</svg>
-                        `;
-                },
-                
-                mouseover: (e, selector) => {
-                    selector.tmpFunc = E => methods.pressLiz(E, selector);
-                    window.addEventListener('keydown', selector.tmpFunc)
-                },
-                
-                mouseout: (e, selector) => {
-                    window.removeEventListener('keydown', selector.tmpFunc)
-                },
-                
-            }
-            //}
-    
-        ) {
-    
-            document.querySelectorAll(
-    
-                `[data-${prefs.selector}]:not(script)`
-    
-            ).forEach((obj, i) => obj.dispatchEvent(
-                new CustomEvent(prefs.selector + '-load', {
-                    detail: (this[i] = new (function() {
-                        
-                        this.vals = new Proxy(Object.assign({},
-                            prefs,
-                            JSON.parse(obj.dataset[prefs.selector] || '{}'),
-                            stored_prefs[obj.id] || {}
-                            ,{ obj: obj, id: obj.id }
-                        ), {
-                            get (tar, prop) { return tar[prop] },
-                            set (tar, prop, val) { tar[prop] = val},
-                        });
-                        
-                        this.svg = obj.querySelector('svg');
-                        this.img = obj.querySelector('img');
-                        
-                        [methods, lizzers].forEach((M, i) => {
-                            for (const[k, v] of Object.entries(M)) {
-                                i === 0 ?
-                                this[k] = () => v(this) :
-                                this.svg.addEventListener(k,
-                                e => v(e, this),
-                                {passive: this.vals.passive})
-                            }
-                        });
-                        
-                    })()),
-                    
-                    n : nicknames[obj.id || prefs.selector + i] =
-                        nicknames[prefs.selector + i] = i
-    
-                })
-            ));
-            
-            for (const [key, val] of Object.entries({
-            
-                load: e => window.dispatchEvent(
-                    new CustomEvent(prefs.selector + '-load', {
-                        detail: new Proxy(this, {
-                            get(target, prop) {
-                                return target[nicknames[prop]] || target[prop] || '';
-                            }
-                        })
-                    })
-                ),
-            
-                beforeunload: e => {
-                  //localStorage.setItem(prefs.appName, JSON.stringify(prefs))
-                },
-                
-                ['get-' + prefs.selector] : e => {
-                    console.log('getting ref', e);
-                    e.detail = new Proxy(this, {
-                        get(target, prop) {
-                            return target[nicknames[prop]] || target[prop] || '';
-                        }
-                    })
-                }
-            
-            })){
-                window.addEventListener(key, val);//, { once: true });
-            }
-            
-        })()
-    
-    )
-    
-)() //}
-
-=== undefined || (document.body.innerHTML = 'eXp!red');
-
-
-</script>
 
 </html>
   
