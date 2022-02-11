@@ -1,7 +1,7 @@
 <!doctype html><html>
 
 <head>
-<title>ikonoklazc</title>
+<title>ikonoklazky</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link id="luckiestFont" href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
 <style id="demoStyles">
@@ -20,8 +20,8 @@
     
     --midness: hsl(
         var(--circ-h),
-        calc(0.8 * var(--circ-s)),
-        calc(0.75 * var(--circ-l))
+        calc(0.2 * var(--circ-s)),
+        calc(0.5 * var(--circ-l))
     );
     
     --darkness: hsl(
@@ -208,7 +208,7 @@ svg {
 }
 
 #svgHolder {
-    --nose-hsla: hsla(40, 100%, 70%, 0.5);
+    --nose-hsla: hsla(40, 100%, 70%, 0);
     --key: hsla(
         var(--nose-h),
         var(--nose-s),
@@ -222,18 +222,23 @@ svg {
         calc(var(--nose-l))
     );
     --back: hsla(
-        calc(180 + var(--nose-h)),
+        calc(-60 + var(--nose-h)),
         50%,
         50%,
         var(--nose-l)
     );
+    --shadow: hsla(
+        0,0%,0%,var(--nose-l)
+    )
     --shade: hsla(0, 0%, 0%, 0.35);
+    overflow: hidden;
 }
 
 #svgDemo {
     
     border: 10px solid #000;
     background-color: #666;
+    overflow: hidden;
 }
 
 #rex {
@@ -245,9 +250,14 @@ svg {
     --fill-light: var(--fill);
     --back-light: var(--back);
     
+    /*
+    --blurb: calc(2px * var(--nose-a));
+    filter: blur(var(--blurb));
+    */
+    
 }
 
-#pill {
+#poppy {
     --body-color: #ddd;
     --outline-color: #000;
     
@@ -271,20 +281,52 @@ svg {
     <div demo class="qr">
         
       <div id="svgHolder">
+          
         <svg id="svgDemo"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             viewBox="-5 -5 320 210"
-        ><g
+            filter="url(#noise)"
+        >
+            
+         <defs>
+          <filter id="displacementFilter">
+           <feTurbulence
+             type="turbulence" baseFrequency="0.05"
+             numOctaves="2" result="turbulence"/>
+           <feDisplacementMap
+             in2="turbulence" in="SourceGraphic"
+             scale="50" xChannelSelector="R"
+             yChannelSelector="G"/>
+          </filter>
+          <filter id="noise">
+      	   <feTurbulence
+      	    type="fractalNoise"
+      	    baseFrequency="150"
+      	    numOctaves="14"
+      	    result="noisy" />
+	        <feColorMatrix type="saturate" values="0"/>
+            <feBlend
+             in="SourceGraphic"
+             in2="noisy"
+             mode="darken" />
+           </filter>
+         </defs>
+         
+         <g
           id="sceneGroup"
           data-nose="svgHolder"
           pointer-events="all"
          >
+          <ellipse id="zone" fill="none"
+           cx="160" cy="110" rx="55" ry="40"
+          />
+          
           <use id="rex" xlink:href="rex.svg#ikon"
            transform="translate(100,110)"
           />
             
-          <use id="pill" xlink:href="pill.svg#ikon"
+          <use id="poppy" xlink:href="poppy.svg#ikon"
            transform="translate(230,117)"
           />
             
@@ -292,6 +334,7 @@ svg {
            transform="translate(155,177)"
           />
         </g></svg>
+      
       </div>
       
       <br>
@@ -370,8 +413,11 @@ svg {
         </div>
         
         <div style="text-align:center;">
-            <object data="pill.svg#ikon"
-             style="height:170px;"
+            <object data="poppy.svg"
+             style="
+                height:170px;
+                --body-color: #ea0;
+             "
             ></object>
         </div>
         
@@ -397,9 +443,9 @@ svg {
             --body-color: var(--midness);
             --lid-color: #fff;
             --outline-color:var(--blackness);
-            --label-color: var(--lid-color);
+            --label-color: var(--darkness);
             --label-outline: 3;
-            --label-outline-color: var(--darkness);
+            --label-outline-color: var(--outline-color);
             --RX-color: var(--outline-color);
             --key-light: none;
             --fill-light: none;
@@ -410,6 +456,16 @@ svg {
         </div>
         
         &middot;&middot;&middot;
+    </div>
+    
+    <div class="qr">
+        
+        the
+    <a href="https://vecta.io/blog/best-way-to-embed-svg">
+        actual best way</a>
+        to include svg is:
+        <i>inline, as a <b>use statement</b></i>
+        
     </div>
     
     
