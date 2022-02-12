@@ -107,22 +107,26 @@ body {
 
 a {
     text-decoration: none;
-    color: var(--greyed-out);
 }
 
 a:hover, a:visited {
-    color: var(--greyed-out);
     transition: color linear var(--trans-speed);
 }
 
-h2 {
+.qa > div > a, .qa > div  > a,
+.qb > div > a, .qb > div  > a,
+.qa > div > a:hover, .qa > div  > a:visited,
+.qb > div > a:hover, .qb > div> a:visited
+{
+    color: var(--lightness);
+}
+.qr > b {
     color: var(--darkness);
 }
-
-b {
-    color: var(--darkness);
+.qa > div > b,
+.qb > div > b {
+    color: var(--lightness);
 }
-
 
 pre {
     background-color: var(--midness);
@@ -186,11 +190,6 @@ hr {
 
 .qa, .qb {
     color: var(--midness);
-}
-
-.qa > div > b,
-.qb > div > b,
-    color: var(--lightness);
 }
 
 .mobr {
@@ -611,9 +610,13 @@ svg {
         
         <div>
             for example, both the
-            <i><a download href="rex.svg">Rex</a></i>
+            <a download href="rex.svg">
+                <b><i>Rex</i></b>
+            </a>
             and the
-            <i><a download href="poppy.svg">Poppy</a></i>
+            <a download href="poppy.svg">
+                <b><i>Poppy</i></b>
+            </a>
             files have css vars called
             <i>&#8209;&#8209;key-light</i>,
             <i>&#8209;&#8209;fill-light</i>, and
@@ -623,11 +626,11 @@ svg {
             overwriting them in both files,
             and creating the lighting effects of the
             scene -
-            <i>
-            <a download href="chalkie.svg">Chalkie</a>
-            </i>
+            <a download href="chalkie.svg">
+                <b><i>Chalkie</i></b>
+            </a>
             here is also
-            experincing the same bottle of
+            experiencing the same bottle of
             lightening
         </div>
         
