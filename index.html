@@ -69,6 +69,34 @@ body {
 }
 
 .holder {
+    --nose-hsla: hsla(39, 100%, 30%, 0);
+    --key: hsla(
+        var(--nose-h),
+        var(--nose-s),
+        var(--nose-l),
+        var(--nose-l)
+    );
+    --fill: hsla(
+        var(--nose-h),
+        0%,
+        0%,
+        calc(var(--nose-l))
+    );
+    --back: hsla(
+        calc(-60 + var(--nose-h)),
+        50%,
+        50%,
+        var(--nose-l)
+    );
+    --shadow: hsla(
+        0,0%,0%,var(--nose-l)
+    )
+    --shade: hsla(0, 0%, 0%, 0.35);
+    
+    --ground-color: #000;
+    
+    --disp-scale:calc((var(--nose-l)-30%)/(.8-.3));
+    
 	position: relative;
     color: var(--main-color);
     background-color: var(--holder-back);
@@ -95,10 +123,6 @@ b {
     color: var(--darkness);
 }
 
-.qa > div > b,
-.qb > div > b {
-    color: var(--lightness);
-}
 
 pre {
     background-color: var(--midness);
@@ -158,6 +182,15 @@ hr {
 
 .qb > div:nth-child(2) {
   width: 65%;
+}
+
+.qa, .qb {
+    color: var(--midness);
+}
+
+.qa > div > b,
+.qb > div > b,
+    color: var(--lightness);
 }
 
 .mobr {
@@ -220,36 +253,7 @@ svg {
 }
 
 #svgHolder {
-    --nose-hsla: hsla(40, 100%, 30%, 0);
-    --key: hsla(
-        var(--nose-h),
-        var(--nose-s),
-        var(--nose-l),
-        var(--nose-l)
-    );
-    --fill: hsla(
-        var(--nose-h),
-        0%,
-        0%,
-        calc(var(--nose-l))
-    );
-    --back: hsla(
-        calc(-60 + var(--nose-h)),
-        50%,
-        50%,
-        var(--nose-l)
-    );
-    --shadow: hsla(
-        0,0%,0%,var(--nose-l)
-    )
-    --shade: hsla(0, 0%, 0%, 0.35);
-    
-    --ground-color: #000;
-    
-    --disp-scale:calc((var(--nose-l)-30%)/(.8-.3));
-    
     overflow: hidden;
-    
 }
 
 #svgDemo {
@@ -295,7 +299,7 @@ svg {
 </head>
 
 <body>
-<div class="holder">
+<div id="hold0" class="holder">
     
     <div demo class="qr">
         
@@ -321,10 +325,10 @@ svg {
           <filter id="noise">
       	   <feTurbulence
       	    type="fractalNoise"
-      	    baseFrequency="150"
-      	    numOctaves="14"
+      	    baseFrequency="15"
+      	    numOctaves="4"
       	    result="noisy" />
-	        <feColorMatrix type="saturate" values="0"/>
+	        <feColorMatrix type="saturate" values="10"/>
             <feBlend
              in="SourceGraphic"
              in2="noisy"
@@ -339,7 +343,7 @@ svg {
          
          <g
           id="sceneGroup"
-          data-nose="svgHolder"
+          data-nose="hold0"
           pointer-events="all"
          >
           <ellipse id="zone" fill="none"
@@ -353,20 +357,19 @@ svg {
           <use id="poppy" xlink:href="poppy.svg#ikon"
            transform="translate(230,117)"
           />
+        </g>
             
-          <ellipse id="floor"
-           cx="156" cy="200" rx="180" ry="18"
-           fill="url(#grad0)"
-           opacity="calc(
-            (var(--nose-l) - 30%) / (.8 - .3)
-           )"
-          />
+        <ellipse id="floor"
+         cx="156" cy="200" rx="180" ry="18"
+         fill="url(#grad0)"
+         opacity="calc((var(--nose-l) - 30%)/(.8-.3))"
+        />
           
-          <use id="ground" xlink:href="ground.svg#ikon"
-           transform="translate(155,177)"
-          />
+        <use id="ground" xlink:href="ground.svg#ikon"
+         transform="translate(155,177)"
+        />
           
-        </g></svg>
+        </svg>
       
       </div>
       
@@ -385,7 +388,8 @@ svg {
           sceneGroup.addEventListener(evt, e => {
               
             let xpar =
-               window.getComputedStyle(svgHolder)
+               window.getComputedStyle(
+               document.getElementById('hold0'))
               .getPropertyValue('--nose-l');
               
             document.getElementById('rex')
@@ -422,7 +426,7 @@ svg {
           ">
         </div>
         
-        <div style="color:var(--midness);">
+        <div>
             take a look at <b><i>Rex</i></b> - here he is
             as just an image tag, in his default
             state: a little bit of shade, a very
@@ -437,13 +441,13 @@ svg {
     
     <div poppy-obj class="qa">
         
-        <div style="color:var(--midness);">
+        <div>
             now let's look at people like
             the objects they are!
             here's <b><i>Poppy</i></b> as the
             <i>data</i> attribute of an
             <i>object</i> tag - now if you
-            mouse-over him, you'll see a list
+            mouseover him, you'll see a list
             of <i>css-variables</i> that can
             be used to customize him
             when he's finally instanciated in
@@ -453,10 +457,7 @@ svg {
         
         <div style="text-align:center;">
             <object data="poppy.svg"
-             style="
-                height:170px;
-                --body-color: #ea0;
-             "
+             style="height:170px;"
             ></object>
         </div>
         
@@ -465,7 +466,7 @@ svg {
     <hr>
     <div rex-use class="qr">
         
-        finally we have Rex here as an
+        at last, we have Rex here as an
         <i>svg use</i> statement that has been
         customized for our own pleasure;
         when used this way, it's possible to
@@ -497,7 +498,7 @@ svg {
         &middot;&middot;&middot;
     </div>
     
-    <div class="qr">
+    <div best class="qr">
         
         the
     <a href="https://vecta.io/blog/best-way-to-embed-svg">
@@ -506,21 +507,152 @@ svg {
         <i>as a <b>use statement</b> ikon</i>;
         this combines the "ease of maintenance" of
         an external file with the css maniplability
-        of inline svg
+        of inline svg - like this, in a page:
         <br><br>
         
         <pre>
             
+&lt;html&gt;
+
 &lt;svg viewBox="0 0 100 100"&gt;
     &lt;use xlink:href="rex.svg#ikon" /&gt;
 &lt;/svg&gt;
+
+&lt;/html&gt;
         </pre>
         
     </div>
     
+    <div prescrip class="qr">
+        
+        in the <i>.svg</i> file itself, put
+        the ikon in a <i>def</i> tag, use
+        <i>css-var, fallbacks</i> for default
+        styling, and then create a <i>use</i>
+        reference to the ikon, with a descriptive
+        <i>title</i>
+        <br><br>
+        
+        <pre>
+            
+&lt;svg&gt;
+
+    &lt;defs&gt;
+        &lt;g id="ikon"&gt;
+        
+            &lt;!--
+                this rect will use the css
+                variable '--rect-fill',
+                otherwise it will fallback
+                to the hard-coded color
+            --&gt;
+            
+            &lt;rect fill="var(--rect-fill, #c30)"/&gt;
+            
+        &lt;/g&gt;
+    &lt;/defs&gt;
+    
+    &lt;!--
+        this separate group is what will be
+        displayed if this file is used in
+        an image, or object, tag
+    --&gt;
+    
+    &lt;g&gt;
+    
+        &lt;!--
+            explain which id's to use
+            and what vars can be set
+            in this title area
+        --&gt;
+        
+        &lt;title&gt;
+        
+            #ikon ::: [the id to use]
+        
+            --rect-fill [all the vars]
+            ...
+        
+        &lt;/title&gt;
+        
+        &lt;!--
+            instanciate the ikon here
+            in a use tag, exactly as would
+            be done inline on a page
+        --&gt;
+        
+        &lt;use xlink:href="#ikon" /&gt;
+        
+    &lt;/g&gt;
+    
+
+&lt;/svg&gt;
+        </pre>
+        
+        <br>
+        when this type of file is <b>xlink:ed</b>
+        in a <i>use</i> tag, the <i>#ikon</i>
+        in the url
+        refers to the <i>def</i> version, which
+        attempts to find the css values before
+        falling back on the hard times of default
+        
+        <br><br><dd><code>
+        &lt;use xlink:href="file.svg#ikon" /&gt;
+        </code></dd><br>
+        
+        any of the default values can be left alone,
+        or overwritten if the page includes those
+        variable names
+        <br><br>
+    </div>
+    
+    <div chalkie class="qa">
+        
+        <div>
+            for example, both the
+            <i><a download href="rex.svg">Rex</a></i>
+            and the
+            <i><a download href="poppy.svg">Poppy</a></i>
+            files have css vars called
+            <i>&#8209;&#8209;key-light</i>,
+            <i>&#8209;&#8209;fill-light</i>, and
+            <i>&#8209;&#8209;back-light</i>;
+            this way, the page itself creates and
+            manipulates css variables,
+            overwriting them in both files,
+            and creating the lighting effects of the
+            scene -
+            <i>
+            <a download href="chalkie.svg">Chalkie</a>
+            </i>
+            here is also
+            experincing the same bottle of
+            lightening
+        </div>
+        
+        <div style="text-align:center">
+            <svg
+             style="
+                --key-light: var(--key);
+                --fill-light: var(--fill);
+                --back-light: var(--back);
+                height: 150px;
+                width: 100%;
+                display:inline-block;
+                overflow: visible;
+             "
+             viewBox="30 -5 70 200"
+            >
+             <use xlink:href="chalkie.svg#ikon"/>
+            </svg>
+        </div>
+    
+    </div>
     
     
-    <br><br><hr><div class="qr signature">~queviva</div>
+    
+    <hr><div class="qr signature">~queviva</div>
     
 </div>
 </body>
