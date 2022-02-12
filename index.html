@@ -20,7 +20,7 @@
     
     --midness: hsl(
         var(--circ-h),
-        calc(0.2 * var(--circ-s)),
+        calc(0.6 * var(--circ-s)),
         calc(0.5 * var(--circ-l))
     );
     
@@ -38,7 +38,7 @@
                 
     --main-color: var(--lightness);
     --greyed-out: var(--darkness);
-    --back-color: #666;
+    --back-color: var(--midness);
     --holder-back: #111;
     --faded-txt: hsla(
         var(--circ-h),
@@ -93,6 +93,11 @@ h2 {
 
 b {
     color: var(--darkness);
+}
+
+.qa > div > b,
+.qb > div > b {
+    color: var(--lightness);
 }
 
 pre {
@@ -163,6 +168,10 @@ hr {
     display: inline-block;
 }
 
+.abhr {
+    display: none;
+}
+
 /*possibly a portrait mobi-fone*/
 @media screen and (max-width:500px) {
 
@@ -178,7 +187,10 @@ hr {
         display: inline-block;
     }
     .hobr {
-        display: none;
+        display: inline-block;
+    }
+    .abhr {
+        display: block;
     }
     
 }
@@ -208,7 +220,7 @@ svg {
 }
 
 #svgHolder {
-    --nose-hsla: hsla(40, 100%, 70%, 0);
+    --nose-hsla: hsla(40, 100%, 30%, 0);
     --key: hsla(
         var(--nose-h),
         var(--nose-s),
@@ -231,18 +243,25 @@ svg {
         0,0%,0%,var(--nose-l)
     )
     --shade: hsla(0, 0%, 0%, 0.35);
+    
+    --ground-color: #000;
+    
+    --disp-scale:calc((var(--nose-l)-30%)/(.8-.3));
+    
     overflow: hidden;
+    
 }
 
 #svgDemo {
     
     border: 10px solid #000;
-    background-color: #666;
+    background-color: var(--midness);
     overflow: hidden;
 }
 
 #rex {
     
+    --body-color: var(--darkness);
     --RX-color: hsla(0,80%,20%,0.12);
     --RX-visibility: hidden;
                 
@@ -268,7 +287,7 @@ svg {
 }
 
 #ground {
-    --color: #000;
+    --color: var(--ground-color);
 }
     
 </style>
@@ -290,13 +309,14 @@ svg {
         >
             
          <defs>
-          <filter id="displacementFilter">
+          <filter id="disp">
            <feTurbulence
              type="turbulence" baseFrequency="0.05"
              numOctaves="2" result="turbulence"/>
-           <feDisplacementMap
+           <feDisplacementMap id="fDP"
              in2="turbulence" in="SourceGraphic"
-             scale="50" xChannelSelector="R"
+             scale="50"
+             xChannelSelector="R"
              yChannelSelector="G"/>
           </filter>
           <filter id="noise">
@@ -311,6 +331,11 @@ svg {
              in2="noisy"
              mode="darken" />
            </filter>
+          <linearGradient
+           id="grad0" x1="0" y1="0" x2="1" y2="1">
+           <stop offset="0%" stop-color="var(--back)" />
+           <stop offset="40%" stop-color="#000" />
+          </linearGradient>
          </defs>
          
          <g
@@ -323,16 +348,25 @@ svg {
           />
           
           <use id="rex" xlink:href="rex.svg#ikon"
-           transform="translate(100,110)"
+           transform="translate(100,108)"
           />
             
           <use id="poppy" xlink:href="poppy.svg#ikon"
            transform="translate(230,117)"
           />
             
+          <ellipse id="floor"
+           cx="156" cy="200" rx="180" ry="18"
+           fill="url(#grad0)"
+           opacity="calc(
+            (var(--nose-l) - 30%) / (.8 - .3)
+           )"
+          />
+          
           <use id="ground" xlink:href="ground.svg#ikon"
            transform="translate(155,177)"
           />
+          
         </g></svg>
       
       </div>
@@ -350,13 +384,17 @@ svg {
       <script>
         ['wheel','touchmove'].forEach(evt => {
           sceneGroup.addEventListener(evt, e => {
+              
+            let xpar =
+               window.getComputedStyle(svgHolder)
+              .getPropertyValue('--nose-l');
+              
             document.getElementById('rex')
             .style.setProperty(
               '--RX-visibility',
-              window.getComputedStyle(svgHolder)
-              .getPropertyValue('--nose-l') === '0%' ?
-              'visible' : 'hidden'
-             )
+              xpar === '0%' ? 'visible' : 'hidden'
+            );
+            
           })
         });
       </script>
@@ -386,7 +424,7 @@ svg {
         </div>
         
         <div style="color:var(--midness);">
-            take a look at <i><b>Rex</b></i> - here he is
+            take a look at <b><i>Rex</i></b> - here he is
             as just an image tag, in his default
             state: a little bit of shade, a very
             faint logo on his prescription sweater,
@@ -396,12 +434,14 @@ svg {
 
     </div>
     
+    <hr class="abhr">
+    
     <div poppy-obj class="qa">
         
         <div style="color:var(--midness);">
             now let's look at people like
             the objects they are!
-            here's <i><b>Poppy</b></i> as the
+            here's <b><i>Poppy</i></b> as the
             <i>data</i> attribute of an
             <i>object</i> tag - now if you
             mouse-over him, you'll see a list
@@ -464,13 +504,24 @@ svg {
     <a href="https://vecta.io/blog/best-way-to-embed-svg">
         actual best way</a>
         to include svg is:
-        <i>inline, as a <b>use statement</b></i>
+        <i>as a <b>use statement</b> ikon</i>;
+        this combines the "ease of maintenance" of
+        an external file with the css maniplability
+        of inline svg
+        <br><br>
+        
+        <pre>
+            
+&lt;svg viewBox="0 0 100 100"&gt;
+    &lt;use xlink:href="rex.svg#ikon" /&gt;
+&lt;/svg&gt;
+        </pre>
         
     </div>
     
     
     
-    <br><hr><div class="qr signature">~queviva</div>
+    <br><br><hr><div class="qr signature">~queviva</div>
     
 </div>
 </body>
