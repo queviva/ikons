@@ -2,9 +2,15 @@
 
 <head>
 <title>ikonoklazky</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link id="luckiestFont" href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 <style id="demoStyles">
+
+@font-face {
+    font-family : luckiest;
+    src : url(luckiest.ttf);
+}
+
 :root {
     
     --circ-h: 20;
@@ -236,7 +242,7 @@ hr {
 
 .signature {
     text-align: right;
-    font-family: 'luckiest guy';
+    font-family: 'luckiest';
     font-style: italic;
     height: 200px;
     color: var(--darkness);
@@ -295,9 +301,13 @@ svg {
     --color: var(--ground-color);
 }
 
-/*possibly a mobile landscaper*/
+/*possibly a mobile landscraper*/
 @media screen and (orientation: landscape) and (max-width: 760px) {
 
+    #svgDemo {
+        height: 200px;
+        width: 100%;
+    }
     
 }
     
@@ -367,7 +377,8 @@ svg {
         </g>
             
         <ellipse id="floor"
-         cx="156" cy="200" rx="180" ry="18"
+         cx="154" cy="210"
+         rx="220" ry="28"
          fill="url(#grad0)"
          opacity="calc((var(--nose-l) - 30%)/(.8-.3))"
         />
@@ -390,7 +401,7 @@ svg {
         change the lighting</i><span class="hobr">]</span>
        </center>
       
-      <script>
+      <!--script>
         ['wheel','touchmove'].forEach(evt => {
           sceneGroup.addEventListener(evt, e => {
               
@@ -405,9 +416,15 @@ svg {
               xpar === '0%' ? 'visible' : 'hidden'
             );
             
+            document.getElementById('poppy')
+            .style.setProperty(
+              '--shade-color',
+              xpar === '0%' ? 'none' : 'var(--shade)'
+            );
+            
           })
         });
-      </script>
+      </script-->
       
     </div>
     
@@ -649,7 +666,7 @@ svg {
                 --key-light: var(--key);
                 --fill-light: var(--fill);
                 --back-light: var(--back);
-                height: 150px;
+                height: 200px;
                 width: 100%;
                 display:inline-block;
                 overflow: visible;
