@@ -38,7 +38,7 @@
                 
     --main-color: var(--lightness);
     --greyed-out: var(--darkness);
-    --back-color: var(--midness);
+    --back-color: #666;
     --holder-back: #111;
     --faded-txt: hsla(
         var(--circ-h),
@@ -62,9 +62,6 @@ body {
     background-color: var(--back-color);
     font-size: 22px;
     text-align: justify;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -epub-hyphens: auto;
     hyphens: auto;
 }
 
@@ -122,9 +119,11 @@ a:hover, a:visited {
 {
     color: var(--lightness);
 }
+
 .qr > b {
     color: var(--darkness);
 }
+
 .qa > div > b,
 .qb > div > b {
     color: var(--lightness);
@@ -221,7 +220,7 @@ hr {
         display: inline-block;
     }
     .hobr {
-        display: inline-block;
+        display: none;
     }
     .abhr {
         display: block;
@@ -229,7 +228,7 @@ hr {
     
 }
 
-/*possibly a mobile landscaper*/
+/*possibly a mobile landscraper*/
 @media screen and (orientation: landscape) and (max-width: 760px) {
 
     
@@ -250,7 +249,8 @@ hr {
 svg {
     height: inherit;
     width: inherit;
-    display:block;
+    display: block;
+    isolation: isolate;
 }
 
 #svgHolder {
@@ -293,6 +293,12 @@ svg {
 
 #ground {
     --color: var(--ground-color);
+}
+
+/*possibly a mobile landscaper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+
+    
 }
     
 </style>
@@ -447,7 +453,7 @@ svg {
             the objects they are!
             here's <b><i>Poppy</i></b> as the
             <i>data</i> attribute of an
-            <i>object</i> tag - now if you
+            <i>object</i> tag - now, if you
             mouseover him, you'll see a list
             of <i>css-variables</i> that can
             be used to customize him
@@ -636,9 +642,10 @@ svg {
             lightening
         </div>
         
-        <div style="text-align:center">
+        <div class="qr" style="text-align:center">
             <svg
              style="
+                --body-color: #ddd;
                 --key-light: var(--key);
                 --fill-light: var(--fill);
                 --back-light: var(--back);
@@ -646,8 +653,9 @@ svg {
                 width: 100%;
                 display:inline-block;
                 overflow: visible;
+                background-color: var(--midness);
              "
-             viewBox="30 -5 70 200"
+             viewBox="30 -25 70 200"
             >
              <use xlink:href="chalkie.svg#ikon"/>
             </svg>
