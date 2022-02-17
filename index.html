@@ -1,7 +1,7 @@
 <!doctype html><html>
 
 <head>
-<title>ikonoklazky</title>
+<title>ikonzky</title>
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 <style id="demoStyles">
@@ -26,7 +26,7 @@ content="width=device-width, initial-scale=1.0">
     
     --midness: hsl(
         var(--circ-h),
-        calc(0.6 * var(--circ-s)),
+        calc(0.5 * var(--circ-s)),
         calc(0.5 * var(--circ-l))
     );
     
@@ -72,33 +72,41 @@ body {
 }
 
 .holder {
+    
     --nose-hsla: hsla(39, 100%, 30%, 0);
+    
     --key: hsla(
         var(--nose-h),
         var(--nose-s),
         var(--nose-l),
         var(--nose-l)
     );
+    
     --fill: hsla(
         var(--nose-h),
         0%,
         0%,
         calc(var(--nose-l))
     );
+    
     --back: hsla(
         calc(-60 + var(--nose-h)),
         50%,
         50%,
         var(--nose-l)
     );
+    
     --shadow: hsla(
         0,0%,0%,var(--nose-l)
     )
+    
     --shade: hsla(0, 0%, 0%, 0.35);
+    /* !!!MUST have spaces between -'s !!!
+    calc((var(--nose-l) - 30%)/(.8 - .3)) */
+    --shade-op : calc((var(--nose-l) - 10%) * 2.5);
     
     --ground-color: #000;
-    
-    --disp-scale:calc((var(--nose-l)-30%)/(.8-.3));
+    --floor-opacity: calc((var(--nose-l) - 30%) * 2);
     
 	position: relative;
     color: var(--main-color);
@@ -106,6 +114,7 @@ body {
     margin: auto;
     width: 100%;
     max-width: 700px;
+    
 }
 
 a {
@@ -259,6 +268,10 @@ svg {
     isolation: isolate;
 }
 
+#demo {
+    user-select: none;
+}
+
 #svgHolder {
     overflow: hidden;
 }
@@ -318,7 +331,7 @@ svg {
 <body>
 <div id="hold0" class="holder">
     
-    <div demo class="qr">
+    <div id="demo" class="qr">
         
       <div id="svgHolder">
           
@@ -380,7 +393,7 @@ svg {
          cx="154" cy="210"
          rx="220" ry="28"
          fill="url(#grad0)"
-         opacity="calc((var(--nose-l) - 30%)/(.8-.3))"
+         opacity="var(--floor-opacity, 1)"
         />
           
         <use id="ground" xlink:href="ground.svg#ikon"
@@ -401,7 +414,7 @@ svg {
         change the lighting</i><span class="hobr">]</span>
        </center>
       
-      <!--script>
+      <script>
         ['wheel','touchmove'].forEach(evt => {
           sceneGroup.addEventListener(evt, e => {
               
@@ -409,22 +422,10 @@ svg {
                window.getComputedStyle(
                document.getElementById('hold0'))
               .getPropertyValue('--nose-l');
-              
-            document.getElementById('rex')
-            .style.setProperty(
-              '--RX-visibility',
-              xpar === '0%' ? 'visible' : 'hidden'
-            );
-            
-            document.getElementById('poppy')
-            .style.setProperty(
-              '--shade-color',
-              xpar === '0%' ? 'none' : 'var(--shade)'
-            );
             
           })
         });
-      </script-->
+      </script>
       
     </div>
     
@@ -490,7 +491,8 @@ svg {
     <hr>
     <div rex-use class="qr">
         
-        at last, we have Rex here as an
+        at last, we have <b><i>Rex</i></b>
+        here as an
         <i>svg use</i> statement that has been
         customized for our own pleasure;
         when used this way, it's possible to
@@ -549,13 +551,28 @@ svg {
     
     <div prescrip class="qr">
         
-        in the <i>.svg</i> file itself, put
-        the ikon in a <i>def</i> tag, use
-        <i>css-var, fallbacks</i> for default
-        styling, and then create a <i>use</i>
-        reference to the ikon, with a descriptive
-        <i>title</i>
-        <br><br>
+        in the <i>.svg</i> file itself
+        
+        <ul style="list-style-type:circle;">
+            
+        <li>put the ikon in a <i>def</i> tag
+        </li>
+        <br>
+        
+        <li>use <i>(--css-var, fallback)'s</i>
+        for default styling
+        </li>
+        <br>
+        
+        <li>inlcude an informative <i>title</i>
+        </li>
+        <br>
+        
+        <li>create a <i>use#</i> reference
+        to the ikon</li>
+        
+        </ul>
+        <br>
         
         <pre>
             
@@ -594,8 +611,9 @@ svg {
         
             #ikon ::: [the id to use]
         
-            --rect-fill [all the vars]
-            ...
+            --rect-fill : [color]
+            
+            [... list all the vars ...]
         
         &lt;/title&gt;
         
@@ -618,7 +636,7 @@ svg {
         in a <i>use</i> tag, the <i>#ikon</i>
         in the url
         refers to the <i>def</i> version, which
-        attempts to find the css values before
+        attempts to find the --css-var values before
         falling back on the hard times of default
         
         <br><br><dd><code>
