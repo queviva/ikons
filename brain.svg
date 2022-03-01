@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 680 680">
+    
+<defs><g id="ikon">
+    
+    <path d="M0 0H680V680H0Z" fill="var(--outline,rgb(0,0,0))"/>
+    
+    <path d="M393 286L640 40V640H539C539 502 483 377 393 286Z" fill="var(--key-light,rgb(255,153,0))"/>
+    
+    <path d="M40 158A482 482 0 0 1 521 640H40Z" fill="var(--fill-light,rgb(255,0,0))"/>
+    
+    <path d="M40 142A492 492 0 0 1 381 275A413 413 0 0 0 453 40H40Z" fill="var(--back-light,rgb(0,0,255))"/>
+    
+</g></defs>
+
+<use xlink:href="#ikon"/>
+
+</svg>
