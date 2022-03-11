@@ -1,0 +1,58 @@
+<svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ 
+ viewBox="-50 -60 100 120"
+ height="500px"
+ width="500px"
+>
+    <defs>
+        <g id="custom">
+            
+            <path d="M 0 44 H 23 C 33 44 36.333 39 33 34 L 25 22 C 35 47 30 35 0 36 V 37 C 33 37 30 43 0 43 Z  M 0 44 H -23 C -33 44 -36.333 39 -33 34 L -25 22 C -35 47 -30 35 0 36 V 37 C -33 37 -30 43 0 43 Z"
+                fill="none" />
+                
+            <path d="M -12.5 -43.75 H 12.5 L 10 -38 H -1 V -8.5 L -15 35 H -33 L -3.75 -9.25 V -38 H -11 Z "
+                fill="none" />
+                
+            <path d="M -5 -50 H -12.5 V-43.75 H -10 A 5 3.5 0 0 1 -5 -47.5 Z  M -3.75 -9.25 V -40 H -7 V -10 L -37 35 H -33 Z  " fill="none" />
+            
+            <path d="M 30 50 C 40 50 45 40 40 32.5 L 10 -12.5 V -35 A 1.8 2 1 1 0 9 -52.5 H-9 A 1.8 2 1 1 0 -10 -35 V -12.5 L -40 32.5 C -45 40 -40 50 -30 50 Z M 0 45 H 25 C 35 45 38.333 40 35 35 L 5 -10 V -40 H 7.5 A 2.5 2.5 1 0 0 7.5 -47.5 H -7.5 A 2.5 2.5 0 0 0 -7.5 -40 H 0 Q -5 -39 -5 -35 V -10 L -35 35 C -38.333 40 -35 45 -25 45 Z " fill-rule="evenodd"
+                fill="#c30"
+                stroke-width="0.1"/>
+              
+            <path id="RRR" d="M -2 45H 25 C 35 45 38.333 40 35 35 L 5 -10 V -40 H 7.5 A 2.5 2.5 1 0 0 7.5 -47.5 H -2 "
+                stroke="#000"
+                stroke-width="1"
+                stroke-miterlimit="300"
+                fill="none"
+                transform="translate(1.5 0)"
+            />
+            <use xlink:href="#RRR"
+             transform=" scale(-1 1) "
+            />
+        </g>
+    </defs>
+    
+    <g>
+        <title>
+css vars :::
+
+--outline-color : [color];
+
+   ~queviva
+        </title>
+
+        <use id="default" xlink:href="#custom"
+         style="
+            --outline-color: hsl(0,0%,0%);
+            
+            --base-color: hsla(0,0%,20%,0.5);
+            
+            --key-light: hsla(40,100%,90%,0.35);
+            --fill-light: hsla(0,0%,0%,0.15);
+            --back-light: hsla(0,100%,50%,0.5);
+         "
+        />
+    </g>
+</svg>

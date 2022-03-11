@@ -1,0 +1,46 @@
+<svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ height="500"
+ width="500"
+>
+            <path id="RRR" d="
+            M -7 -40
+            V -10
+            L -36 35
+            C -39.333 40 -36 45 -26 45
+            H 26
+            C 36 45 39.333 40 36 35
+            L 6 -10
+            V -40
+            H 7
+            A 2.5 2.5 1 0 0 7 -47.5
+            H -7
+            A 2.5 2.5 1 0 0 -7 -40
+            H -5
+            Q -7 -39 -7 -37
+              "
+                stroke="#000"
+                stroke-width="3"
+                stroke-miterlimit="300"
+                fill="none"
+                transform="translate(50 50)"
+            />
+            
+            <script>
+            let w = parseFloat(
+                document.getElementById('RRR')
+                .getAttribute('stroke-width')
+            );
+            
+            window.addEventListener('keypress', e=>{
+                w +=
+                    e.code === 'Equal' ?  0.1 :
+                    e.code === 'Minus' ? -0.1 :
+                    0
+                document.getElementById('RRR')
+                .setAttribute('stroke-width', w);
+            })
+            </script>
+
+</svg>
