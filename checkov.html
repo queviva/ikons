@@ -393,6 +393,7 @@ let compList = [];
 const draw = e => {
     
     e.preventDefault();
+    e.stopPropagation();
     
     const path = svg.lastChild;
     if (!e.pageX && e.touches) e = e.touches[0];
@@ -451,8 +452,8 @@ const down = e => {
 
 const upp  = path => {
 
-    remLiz('mousemove', draw);
-    remLiz('touchmove', draw);
+    remLiz('mousemove', draw, {passive:false});
+    remLiz('touchmove', draw, {passive:false});
 
     for (let i in this) {
         if (!this[i].completed) {
