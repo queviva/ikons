@@ -1,0 +1,572 @@
+<!doctype html><html lang="en">
+
+<head>
+<title>tcheckovsky</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<style id="demoStyles">
+
+@font-face {
+    font-family : luckiest;
+    src : url(luckiest.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+body {
+    
+    --nose-hsla: hsla(20, 40%, 100%, 0);
+    --nose-h: 20;
+    --nose-s: 40%;
+    --nose-l: 100%;
+    --nose-a: 0;
+    
+    padding: 0;
+    margin: 0;
+    background-color: #666;
+    font-size: 22px;
+    text-align: justify;
+    hyphens: auto;
+        
+    --lightness: hsl(
+        var(--nose-h),
+        var(--nose-s),
+        var(--nose-l)
+    );
+    
+    --midness: hsl(
+        var(--nose-h),
+        calc(0.5 * var(--nose-s)),
+        calc(0.5 * var(--nose-l))
+    );
+    
+    --darkness: hsl(
+        var(--nose-h),
+        var(--nose-s),
+        calc(0.35 * var(--nose-l))
+    );
+    
+    --blackness: hsl(
+        var(--nose-h),
+        var(--nose-s),
+        calc(0.20 * var(--nose-l))
+    );
+                
+    --main-color: var(--lightness);
+    --greyed-out: var(--darkness);
+    --back-color: #666;
+    --holder-back: #111;
+    
+    --trans-speed: 0.3s;
+
+    /* !!!MUST have spaces between -'s !!!
+    calc((var(--nose-l) - 30%)/(.8 - .3)) */
+    
+}
+
+.holder {
+	position: relative;
+    color: var(--main-color);
+    background-color: var(--holder-back);
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+    user-select: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--darkness);
+}
+
+a:hover, a:visited {
+    transition: color linear var(--trans-speed);
+    color: var(--darkness);
+}
+
+.qa > div > a, .qa > div  > a,
+.qb > div > a, .qb > div  > a,
+.qa > div > a:hover, .qa > div  > a:visited,
+.qb > div > a:hover, .qb > div> a:visited
+{
+    color: var(--lightness);
+}
+
+.qr > b {
+    color: var(--darkness);
+}
+
+.qa > div > b,
+.qb > div > b {
+    color: var(--lightness);
+}
+
+pre {
+    background-color: var(--midness);
+    margin: 0px;
+    padding: 10px;
+    color: var(--lightness);
+    overflow: auto;
+}
+
+hr {
+    border-top: 1px solid var(--blackness);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 7px 0px 7px 0px;
+}
+
+.qr {
+    padding: 10px;
+}
+
+.qa:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qa > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qa > div:nth-child(1) {
+  width: 65%;
+}
+
+.qa > div:nth-child(2) {
+  width: 35%;
+}
+
+.qb:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qb > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qb > div:nth-child(1) {
+  width: 35%;
+}
+
+.qb > div:nth-child(2) {
+  width: 65%;
+}
+
+.qa, .qb {
+    color: var(--midness);
+}
+
+.mobr {
+    display: none;
+}
+
+.hobr {
+    display: inline-block;
+}
+
+.abhr {
+    display: none;
+}
+
+/*possibly a portrait mobi-fone*/
+@media screen and (max-width:500px) {
+
+	.qa > div:nth-child(1),
+	.qa > div:nth-child(2),
+	.qb > div:nth-child(1),
+	.qb > div:nth-child(2)
+	{
+    	width: 100%;
+    }
+    
+    .mobr {
+        display: inline-block;
+    }
+    .hobr {
+        display: none;
+    }
+    .abhr {
+        display: block;
+    }
+    ul {
+        text-align: left;
+    }
+
+}
+
+/*possibly a mobile landscraper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+    
+}
+
+.signature {
+    text-align: right;
+    font-family: 'luckiest';
+    font-style: italic;
+    height: 200px;
+    color: var(--darkness);
+    user-select:none;
+}
+
+</style>
+<style id="czechStyles">
+
+[data-czech] {
+    position: relative;
+    height: 52px;
+    padding-left: 58px;
+    margin-top: 20px;
+    margin-left: 5px;
+    width: 100%;
+    user-select: none;
+}
+
+svg {
+    --linesize: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 50px;
+    display: block;
+    z-index: 200;
+    background-color: var(--midness);
+    isolation: isolate;
+    overflow: visible;
+}
+
+path {
+    fill: none;
+    stroke-width: var(--linesize);
+    stroke-linecap: round;
+    stroke: var(--lightness, #f0f);
+}
+
+input {
+    font-family: luckiest;
+    -webkit-text-stroke: 2px var(--lightness);
+}
+
+input[type=button] {
+    height: 40px;
+    width: 150px;
+    font-size: 40px;
+    border-radius: 10px;
+    border-width: 2px;
+    background-color: var(--darkness);
+    --deg: 163deg;
+    background-image: linear-gradient(
+        var(--deg),
+        var(--midness),
+        var(--darkness)
+    );
+    float:left;
+}
+
+input[type=text] {
+    width:300px;
+    height:50px;
+    -webkit-text-stroke: 0px var(--lightness);
+    font-size: 30px;
+    color: var(--blackness);
+    background-color: var(--darkness);
+    float:left;
+}
+
+.box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    border: 1px solid var(--darkness);
+    background-color: var(--midness);
+    background-image: none;
+    transition: all linear 400ms;
+}
+
+.completed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    xxxborder-radius: 50%;
+    border: 1px solid var(--darkness);
+    background-color: var(--blackness);
+    transform: rotate(-360deg);
+    text-align: center;
+    font-size: 20px;
+    line-height: 50px;
+}
+
+.xxxcompleted::after {
+    content: '\2713';
+}
+
+/*possibly a mobile landscraper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+
+    
+}
+    
+</style>
+<script defer src="nanopicker.js"></script>
+</head>
+
+<body>
+<div id="hold0" class="holder">
+    
+    <div id="title" class="qr" data-nose="body" style="
+        font-family: luckiest;
+        font-size: 80px;
+        text-align: center;
+        -webkit-text-stroke: 2px var(--darkness);
+        color: var(--midness);
+        transition: font-size ease-in 1500ms;
+    ">
+        tcheckov
+    </div>
+    
+    <div class="qr" style="
+        font-size:10px;
+        text-align:center;
+    ">
+        This is it, you see - this is the cage of your own
+        making, that keeps you trapped and pacing about
+        in the smallest possible space forever
+    </div>
+    
+    <div id="1" class="qr" data-czech> clean bathroom </div>
+    
+    <div id="2" class="qr" data-czech> buy groceries </div>
+    
+    <div id="3" class="qr" data-czech> get haircut </div>
+
+    <!--div id="addButt" class="qr">
+        <input type="button" value="+">
+        <input type="text" value="bite here"
+        maxlength="50"
+        >
+    </div-->
+    
+    <div class="qr signature">~queviva</div>
+    
+</div>
+<div><svg id="pad" viewbox="0 0 50 50"></svg></div>
+</body>
+
+<script>
+//////////////////////////////////////////////////////////{
+// pizzaface
+//
+const log = console.log;
+//////////////////////////////////////////////////////////}
+
+new function() {
+
+// constants {
+
+const NS = 'http://www.w3.org/2000/svg';
+const addLiz = document.addEventListener;
+const remLiz = document.removeEventListener;
+const svg = document.getElementById('pad');
+let waiting = false;
+let compList = [];
+
+//}
+    
+// app methods {
+
+const draw = e => {
+    
+    e.preventDefault();
+    
+    const path = svg.lastChild;
+    if (!e.pageX && e.touches) e = e.touches[0];
+
+    path.setAttribute('d',
+        path.getAttribute('d') +
+        `L${ e.pageX }  ${ e.pageY }`
+    );
+    
+
+};
+    
+const down = e => {
+
+    if (e.pageX > document.body.offsetWidth/2) {
+        return;
+    }
+    
+    if (!e.pageX) e = e.touches[0];
+    
+    for (let i in this) {
+        if (!this[i].completed) {
+            this[i].activate(true);
+        }
+    }
+    
+    let path;
+    
+    if (waiting) {
+        
+        clearTimeout(waiting);
+        path = svg.lastChild;
+        path.setAttribute('d', path.getAttribute('d') +
+            `M${ e.pageX }  ${ e.pageY }`
+        //+ `L${ e.pageX }  ${ e.pageY }`
+        );
+    
+    } else {
+        
+        path = document.createElementNS(NS, 'path');
+        path.setAttributeNS(null, 'd',
+            `M${ e.pageX }  ${ e.pageY }`
+        //+ `L${ e.pageX }  ${ e.pageY }`
+        );
+    
+        svg.appendChild(path);
+    }
+
+    addLiz('mousemove', draw, {passive:false});
+    addLiz('touchmove', draw, {passive:false});
+
+    addLiz('mouseup',  e => upp(path), {once:true});
+    addLiz('touchend', e => upp(path), {once:true});
+    
+};
+
+const upp  = path => {
+
+    remLiz('mousemove', draw);
+    remLiz('touchmove', draw);
+
+    for (let i in this) {
+        if (!this[i].completed) {
+            this[i].activate(false);
+        }
+    }
+
+    waiting = setTimeout(() => exam(path), 600);
+
+};
+
+const exam = path => {
+
+    const coords = path.getAttributeNS(null, 'd')
+    //.split(/[^]M/)
+    .match(/[\d-]+/g).map(v=>Number(v));
+    
+    const XXX = coords.filter((_,i)=>i%2===0);
+    const YYY = coords.filter((_,i)=>i%2===1);
+    
+    const delta = {
+        x: Math.max(...XXX) - Math.min(...XXX),
+        y: Math.max(...YYY) - Math.min(...YYY)
+    };
+    
+    waiting = false;
+    
+    for (let CZ of compList) {
+        CZ.div.style.setProperty('text-decoration','line-through');
+        CZ.box.classList.add('completed');
+        CZ.box.style.backgroundImage =
+        
+        "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='50' width='50'><path stroke='rgb(255,255,255)' stroke-width='4' vector-effect='non-scaling-stroke' stroke-linecap='round' d='" +
+        path.getAttributeNS(null,'d')
+        
+        +"' transform='scale("+
+        
+            50/Math.max(delta.x, delta.y)
+        
+        +") translate("+
+        
+            -1 * Math.min(...XXX)
+            
+        +", "+
+        
+            (-1 * Math.min(...YYY))
+        
+        +")' fill='none'/></svg>\")"
+        CZ.box.style.backgroundSize = 'cover';
+        CZ.reprep();
+    }
+    
+    compList = [];
+
+    path.style.stroke = 'rgba(0,0,0,0)';
+    setTimeout(() => svg.removeChild(path), 500);
+
+};
+
+//}
+
+// add lizzers {
+
+addLiz('mousedown',  down);
+addLiz('touchstart', down);
+
+//}
+
+// tczech object {
+document.querySelectorAll('[data-czech]')
+.forEach((CZ,i) => this[i] = new function(){
+
+    //!!DEBUGG
+    this.id = CZ.innerHTML + ' ' + i;
+    this.div = CZ;
+    
+    this.completed = false;
+    
+    this.box = document.createElement('div');
+    this.box.classList.add('box');
+    CZ.appendChild(this.box);
+    
+    this.activate = v => {
+        this.box[(v?'add':'remove') + 'EventListener'](
+            'pointermove', this.comp, { once: true }
+        )
+    };
+    
+    this.comp = e => {
+        this.activate(false);
+        this.completed = true;
+        compList.push(this);
+    };
+    
+    this.reprep = () => {
+        
+        this.box.addEventListener('dblclick', e => {
+            
+            this.completed = false;
+            this.box.classList.remove('completed');
+            CZ.style.textDecoration = 'none';
+            this.box.style.backgroundImage = 'none';
+            
+        }, { once: true });
+        
+    };
+    
+}());
+//}
+
+}();
+
+
+</script>
+
+</html>
+  
